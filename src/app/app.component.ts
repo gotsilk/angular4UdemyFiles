@@ -6,13 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  serverElements = [{type:'server',name:'Testserver',serverContent:'just a test'}];
+  serverElements = [{type:'server',name:'Testserver',content:'just a test'}];
 
   onServerAdded(serverData: {serverName:string,serverContent:string}){
     this.serverElements.push({
       type: 'server',
       name: serverData.serverName,
-      serverContent: serverData.serverContent
+      content: serverData.serverContent
     });
   }
 
@@ -20,10 +20,21 @@ export class AppComponent {
     this.serverElements.push({
       type: 'blueprint',
       name: blueprintData.serverName,
-      serverContent: blueprintData.serverContent
+      content: blueprintData.serverContent
     });
   }
 
+  onChangeFirst(){
+    this.serverElements[0].name = 'i change you';
+  }
+
+  onDestroy(){
+    if(this.serverElements.length > 1) {
+      this.serverElements.splice(this.serverElements.length - 1);
+    }else{
+      this.serverElements.splice(0);
+    }
+  }
 
 
 }
